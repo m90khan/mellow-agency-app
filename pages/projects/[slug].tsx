@@ -1,5 +1,6 @@
 import { createClient } from 'contentful';
 import { GetServerSideProps } from 'next';
+import Image from 'next/image';
 import React from 'react';
 
 const WordDetails = ({ project }) => {
@@ -23,6 +24,14 @@ const WordDetails = ({ project }) => {
   return (
     <div>
       <h1>{title}</h1>
+      <p>{description}</p>
+      <Image
+        alt='logo'
+        src={'https:' + thumbImage}
+        layout='responsive'
+        width={project.fields.thumbnail.fields.file.details.image.width}
+        height={project.fields.thumbnail.fields.file.details.image.height}
+      />
     </div>
   );
 };

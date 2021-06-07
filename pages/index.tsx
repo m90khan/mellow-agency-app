@@ -1,17 +1,12 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import Hero from '../components/Home/Hero/Index';
 import Work from '../components/Home/Work/Index';
 import Layout from '../components/Layout';
-import { API_URL, PER_PAGE } from '../utils/helper';
 import { createClient } from 'contentful';
 import WhySection from '../components/Home/Why/Index';
 import Help from '../components/Home/Help/Index';
-import Footer from '../components/Footer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Drawer from '../components/Drawer';
-import Clock from 'react-clock';
 
 import Contact from '../components/Contact/Index';
 export default function Home({ services, projects }) {
