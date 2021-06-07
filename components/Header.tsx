@@ -20,7 +20,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           {!toggleMenu ? (
             <Image
               alt='logo'
-              src='/images/header/logo.svg'
+              src='/images/header/logo.png'
               layout='fixed'
               width={180}
               height={50}
@@ -29,7 +29,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           ) : (
             <Image
               alt='logo'
-              src='/images/header/logo-dark.svg'
+              src='/images/header/logo-dark.png'
               layout='fixed'
               width={180}
               height={50}
