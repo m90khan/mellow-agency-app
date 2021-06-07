@@ -19,7 +19,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           {!toggleMenu ? (
             <Image
               alt='logo'
-              src='https://res.cloudinary.com/m90khan/image/upload/v1623058885/meetup/logo_ikmiza.png'
+              src='/images/logo.svg'
               layout='fixed'
               width={180}
               height={50}
@@ -28,7 +28,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           ) : (
             <Image
               alt='logo'
-              src='https://res.cloudinary.com/m90khan/image/upload/v1623058885/meetup/logo-dark_b8s0xz.png'
+              src='/images/logo-dark.svg'
               layout='fixed'
               width={180}
               height={50}
