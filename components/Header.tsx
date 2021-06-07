@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import media from 'css-in-js-media';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
 export default function Header({ setToggleMenu, toggleMenu }) {
   return (
     <HeaderContainer
@@ -20,7 +19,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           {!toggleMenu ? (
             <Image
               alt='logo'
-              src='/images/header/logo.png'
+              src='https://res.cloudinary.com/m90khan/image/upload/v1623058885/meetup/logo_ikmiza.png'
               layout='fixed'
               width={180}
               height={50}
@@ -29,7 +28,7 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           ) : (
             <Image
               alt='logo'
-              src='/images/header/logo-dark.png'
+              src='https://res.cloudinary.com/m90khan/image/upload/v1623058885/meetup/logo-dark_b8s0xz.png'
               layout='fixed'
               width={180}
               height={50}

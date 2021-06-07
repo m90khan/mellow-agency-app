@@ -153,7 +153,3 @@ export const FeaturedProjects = styled.div`
     }
   }
 `;
-
-//ABOUT SECTION
-
-//Accordion
