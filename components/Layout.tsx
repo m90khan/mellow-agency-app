@@ -7,7 +7,7 @@ import { useRouter, NextRouter } from 'next/router';
 import Header from './Header';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import Cursor from './cursor';
+import Cursor from './Cursor';
 
 interface Props {
   title: string | null;

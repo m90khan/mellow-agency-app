@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components';
 import { useGlobalStateContext } from '../utils/globalContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 const variants = {
   initial: {
