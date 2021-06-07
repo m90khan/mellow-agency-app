@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 import media from 'css-in-js-media';
 
 const GlobalStyle = createGlobalStyle`
- *{
+ /* *{
    outline: 1px solid red;
- }
+ } */
 *,
 *::after,
 *::before {
@@ -51,8 +51,7 @@ body{
 font-family:'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 90%;
-  margin: 0 auto;
+   margin: 0 auto;
 }
 button{
     font-weight: bold;

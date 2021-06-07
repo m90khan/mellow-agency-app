@@ -1,10 +1,14 @@
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import styled from 'styled-components';
 import media from 'css-in-js-media';
 
 import { useRouter, NextRouter } from 'next/router';
 import Header from './Header';
+import Navigation from './Navigation';
+import Footer from './Footer';
+import Cursor from './cursor';
+
 interface Props {
   title: string | null;
   keywords?: string | null;
@@ -14,6 +18,7 @@ interface Props {
 }
 function Layout({ title, keywords, description, children }: Props) {
   const router: NextRouter = useRouter();
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
     <>
@@ -27,10 +32,12 @@ function Layout({ title, keywords, description, children }: Props) {
           href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;800&display=swap'
         />
       </Head>
-      {/* {router.pathname === '/' && <Showcase />} */}
-
-      <Header />
+      <Navigation toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+      <Cursor toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+      <Header toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
       <Container> {children}</Container>
+
+      <Footer />
     </>
   );
 }
@@ -42,7 +49,6 @@ Layout.defaultProps = {
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 80%;
   padding: 0 2rem;
   ${media('<=phone')} {
     max-width: 95%;

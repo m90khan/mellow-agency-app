@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import media from 'css-in-js-media';
@@ -13,18 +13,19 @@ const StyledHero = styled.section`
   overflow: hidden;
 `;
 const LargeTitle = styled(motion.h1)`
-  font-size: 8rem;
+  font-size: 6rem;
   margin: 0;
   overflow: hidden;
   line-height: 1.2;
   transform: rotate(-7deg);
   text-align: center;
-  ${media('<=phone')} {
-    font-size: 6rem;
+  transition: all 1s;
+  ${media('<=tablet')} {
+    font-size: 7rem;
   }
 `;
 const Caption = styled(motion.p)`
-  font-size: 3vw;
+  font-size: 3rem;
   position: absolute;
   color: var(--white);
   width: 100%;
@@ -39,7 +40,7 @@ const Caption = styled(motion.p)`
   }
 
   ${media('<=phone')} {
-    font-size: 2.2rem;
+    font-size: 2rem;
     padding: 1rem;
   }
 `;
@@ -75,9 +76,7 @@ const DownArrow = () => {
   );
 };
 
-const Hero = () => {
-  const [showText, setShowText] = useState(true);
-
+const Hero = ({ showText, setShowText }) => {
   useEffect(() => {
     setTimeout(() => {
       setShowText(false);
@@ -167,7 +166,7 @@ const Hero = () => {
               style={!showText && { transform: 'rotate(0)', animationDuration: '1s' }}
             >
               Mellow Build{' '}
-              {showText ? 'Brands' : <span style={{ color: 'yellow' }}>Brands</span>}
+              {showText ? ' Brands' : <span style={{ color: 'yellow' }}>Brands</span>}
             </LargeTitle>
           </motion.div>
         </motion.div>
@@ -251,9 +250,7 @@ const Hero = () => {
             delay: 3.4,
           }}
         >
-          <div data-scroll data-scroll-speed={1}>
-            <DownArrow />
-          </div>
+          <DownArrow />
         </ArrowWrapper>
       </Container>
     </StyledHero>

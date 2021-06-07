@@ -1,33 +1,49 @@
-import { useContext } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import media from 'css-in-js-media';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export default function Header() {
+export default function Header({ setToggleMenu, toggleMenu }) {
   return (
     <HeaderContainer
-    //   initial={{ opacity: 0, y: -180 }}
-    //   animate={{ opacity: 1, y: 0 }}
-    //   transition={{
-    //     ease: 'easeInOut',
-    //     duration: 1,
-    //     delay: 0.6,
-    //   }}
+      initial={{ opacity: 0, y: -180 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        ease: 'easeInOut',
+        duration: 1,
+        delay: 0.6,
+      }}
     >
       <div className='header-inner'>
         <Link href='/'>
-          <Image
-            alt='logo'
-            src='/images/header/logo.svg'
-            layout='fixed'
-            width={180}
-            height={50}
-          />
+          {!toggleMenu ? (
+            <Image
+              alt='logo'
+              src='/images/header/logo.svg'
+              layout='fixed'
+              width={180}
+              height={50}
+              className='logo'
+            />
+          ) : (
+            <Image
+              alt='logo'
+              src='/images/header/logo-dark.svg'
+              layout='fixed'
+              width={180}
+              height={50}
+              className='logo'
+            />
+          )}
         </Link>
 
-        <div className='hamburger-menu'>
+        <div
+          className={
+            toggleMenu ? 'hamburger-menu hamburger-menu--span' : 'hamburger-menu'
+          }
+          onClick={() => setToggleMenu(!toggleMenu)}
+        >
           <span></span>
           <span></span>
         </div>
@@ -52,6 +68,7 @@ const HeaderContainer = styled(motion.div)`
     justify-content: space-between;
     .logo {
       cursor: pointer;
+      z-index: 100;
     }
 
     .hamburger-menu {
@@ -59,6 +76,7 @@ const HeaderContainer = styled(motion.div)`
       width: 56px;
       border-radius: 100%;
       display: flex;
+      z-index: 100;
       align-items: center;
       justify-content: center;
       flex-direction: column;
@@ -75,9 +93,14 @@ const HeaderContainer = styled(motion.div)`
         width: 20px;
         height: 3px;
         margin: 2px 0;
-        background: white;
+        background: var(--white);
         display: block;
         transition: 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      &--nav {
+        span {
+          background: var(--black) !important;
+        }
       }
     }
   }
