@@ -1,7 +1,11 @@
 import { createClient } from 'contentful';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import React from 'react';
+import Layout from '../../components/Layout';
+import media from 'css-in-js-media';
+import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import Link from 'next/link';
 
 const WordDetails = ({ project }) => {
   const {
@@ -21,18 +25,33 @@ const WordDetails = ({ project }) => {
   } = project.fields;
 
   console.log(featImage, thumbImage);
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <Image
-        alt='logo'
-        src={'https:' + thumbImage}
-        layout='responsive'
-        width={project.fields.thumbnail.fields.file.details.image.width}
-        height={project.fields.thumbnail.fields.file.details.image.height}
-      />
-    </div>
+    <Layout title={title + ' | Mellow'} description={description.slice(0, 200)}>
+      <AnimateSharedLayout>
+        <main className='layout'>
+          <AnimatePresence>
+            <motion.header layoutId='header'>
+              <motion.div layoutId='projectImg'>
+                <Image
+                  alt='logo'
+                  src={'https:' + thumbImage}
+                  layout='responsive'
+                  width={project.fields.thumbnail.fields.file.details.image.width}
+                  height={project.fields.thumbnail.fields.file.details.image.height}
+                />
+              </motion.div>
+              <Link href={`/projects/${project.fields.slug}`}>
+                <motion.h1 layoutId='logo' className='fake-logo'>
+                  {title}
+                </motion.h1>
+              </Link>
+            </motion.header>
+          </AnimatePresence>
+        </main>
+      </AnimateSharedLayout>
+    </Layout>
   );
 };
 

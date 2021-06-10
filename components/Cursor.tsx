@@ -38,9 +38,9 @@ const CursorContainer = styled.div`
   left: 400px;
   width: 20px;
   height: 20px;
-  background: #fffe55;
+  background: #ffff5511;
   border: 5px solid #fffe55;
-  padding: 1rem;
+  padding: 1.2rem;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.1s ease-out;

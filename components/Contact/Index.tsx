@@ -8,29 +8,33 @@ import Image from 'next/image';
 const Contact = () => {
   const { register, handleSubmit } = useForm();
   const [viewport, setViewport] = useState({
-    latitude: 40.712772,
-    longitude: -73.935242,
+    latitude: 52.52,
+    longitude: 13.405,
     width: '800px',
     height: '200px',
     zoom: 12,
   });
   const [lat, setLat] = useState<number>(viewport.latitude);
   const [lng, setLng] = useState<number>(viewport.longitude);
-  const api = {
+  const api: { key: string; base: string } = {
     key: '31e9daffb09f67e82887164afd35aa31',
     base: 'https://api.openweathermap.org/data/2.5/',
   };
   const [weather, setWeather] = useState<any>({});
   useEffect(() => {
     const weatherFeed = async () => {
-      const fetchData = await fetch(`${api.base}weather?q=${'berlin'}&appid=${api.key}`);
-      const res = await fetchData.json();
-      console.log(res);
-      setWeather(res);
-      setLat(res.coord.lat);
-      setLng(res.coord.lon);
+      try {
+        const fetchData = await fetch(
+          `${api.base}weather?q=${'berlin'}&appid=${api.key}`
+        );
+        const res = await fetchData.json();
+        setLat(res.coord.lat);
+        setLng(res.coord.lon);
+        setWeather(res);
+      } catch (error) {
+        console.log(error);
+      }
     };
-
     weatherFeed();
   }, [weather, lng, lat]);
   const dateBuilder = (d) => {
@@ -103,7 +107,7 @@ const Contact = () => {
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
           >
             <Marker key={api.key} latitude={lat} longitude={lng}>
-              <Image src='/images/pin.svg' width={30} height={30} />
+              <Image src='/images/pin.png' width={80} height={50} />
             </Marker>
           </ReactMapGl>
         </div>

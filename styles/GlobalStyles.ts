@@ -1,8 +1,8 @@
 // for addin global styles: createGlobalStyle
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 import media from 'css-in-js-media';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
  /* *{
    outline: 1px solid red;
  } */
@@ -44,14 +44,34 @@ html {
     font-size: 50%; 
 
   } 
+
+  cursor: none;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: var(--black);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--yellow)
+  }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--white)
+  }
   }
   
 body{
-    background-color: var(--black);
+    background-color: ${(props: any) => props.theme.background};
 font-family:'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
    margin: 0 auto;
+   color: ${(props: any) => props.theme.text}
 }
 button{
     font-weight: bold;

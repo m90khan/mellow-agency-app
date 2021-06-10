@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer, useContext, useEffect, useState } from 'react';
 
 //Define Conext
 const GlobalStateContext = createContext({
@@ -32,11 +32,16 @@ const globalReducer = (state, action) => {
 //Provider
 
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(globalReducer, {
-    currentTheme:
+  const [currentTheme, setCurrentTheme] = useState('dark');
+  useEffect(() => {
+    setCurrentTheme(
       window.localStorage.getItem('theme') == null
         ? 'dark'
-        : window.localStorage.getItem('theme'),
+        : window.localStorage.getItem('theme')
+    );
+  }, [currentTheme]);
+  const [state, dispatch] = useReducer(globalReducer, {
+    currentTheme: currentTheme,
     cursorType: false,
     cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
   });

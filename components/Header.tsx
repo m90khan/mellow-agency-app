@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import media from 'css-in-js-media';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import IconToggle from './IconToggle';
 export default function Header({ setToggleMenu, toggleMenu }) {
   return (
     <HeaderContainer
@@ -11,10 +12,11 @@ export default function Header({ setToggleMenu, toggleMenu }) {
       transition={{
         ease: 'easeInOut',
         duration: 1,
-        delay: 0.6,
+        delay: 2,
       }}
     >
       <div className='header-inner'>
+        <IconToggle />
         <Link href='/'>
           {!toggleMenu ? (
             <Image
@@ -85,7 +87,7 @@ const HeaderContainer = styled(motion.div)`
         background: var(--yellow);
       }
       &:hover span {
-        background: var(--black);
+        background: ${(props) => props.theme.text};
       }
 
       span {

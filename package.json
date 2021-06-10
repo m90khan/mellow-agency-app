@@ -18,6 +18,7 @@
     "react-clock": "^3.0.0",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.8.1",
+    "react-icons": "^4.2.0",
     "react-intersection-observer": "^8.32.0",
     "react-locomotive-scroll": "^0.1.8",
     "react-map-gl": "^6.1.16",

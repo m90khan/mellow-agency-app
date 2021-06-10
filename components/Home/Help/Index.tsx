@@ -93,7 +93,7 @@ const Help = ({ setIsActiveDrawer }) => {
   const [secondTitle, setSecondTitle] = useState(false);
   const [sectionRef, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.4,
+    threshold: 0.2,
   });
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const Help = ({ setIsActiveDrawer }) => {
         setTimeout(() => {
           setSecondTitle(true);
         }, 1000);
-      }, 3000);
+      }, 2500);
     }
   }, [inView]);
 

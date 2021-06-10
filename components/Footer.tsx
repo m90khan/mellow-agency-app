@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 // Scroll Animations
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
+import media from 'css-in-js-media';
 
 //Icons
 import { Instagram, Facebook, Vimeo } from '../assets/svg/social-icons';
@@ -15,23 +16,20 @@ export const Container = styled.div`
   width: auto;
   height: 100%;
   display: flex;
-  @media (min-width: 1024px) {
-    max-width: 960px;
-  }
-  @media (min-width: 1216px) {
+  ${media('>desktop')} {
     max-width: 1152px;
   }
-  @media (min-width: 1408px) {
-    max-width: 1244px;
+  ${media('<=desktop', '>tablet')} {
+    max-width: 960px;
+  }
+  ${media('<=tablet', '>phone')} {
+    font-size: 52.5%;
+  }
+  ${media('<=phone')} {
+    font-size: 50%;
   }
 `;
 const Footer = () => {
-  const instagramRef = useRef(null);
-
-  const facebookRef = useRef(null);
-
-  const vimeoRef = useRef(null);
-
   const animation = useAnimation();
   const [footerRef, inView] = useInView({
     triggerOnce: true,
@@ -70,13 +68,13 @@ const Footer = () => {
         </div>
 
         <FooterSocial>
-          <a ref={instagramRef} href='/' target='_blank'>
+          <a href='/' target='_blank'>
             <Instagram />
           </a>
-          <a ref={facebookRef} href='/' target='_blank'>
+          <a href='/' target='_blank'>
             <Facebook />
           </a>
-          <a ref={vimeoRef} href='/' target='_blank'>
+          <a href='/' target='_blank'>
             <Vimeo />
           </a>
         </FooterSocial>

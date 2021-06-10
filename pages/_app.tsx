@@ -1,8 +1,10 @@
 import GlobalStyle from '../styles/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import { useGlobalStateContext } from '../utils/globalContext';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { GlobalProvider, useGlobalStateContext } from '../utils/globalContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
+import { useRef } from 'react';
 
 const variants = {
   initial: {
@@ -23,10 +25,10 @@ const variants = {
 };
 
 function MyApp({ Component, pageProps }) {
-  const { cursorStyles, currentTheme } = useGlobalStateContext();
+  const { currentTheme } = useGlobalStateContext();
 
   const router = useRouter();
-  const darkTheme = {
+  const darkTheme: DefaultTheme = {
     background: '#000',
     text: '#fff',
   };
@@ -35,22 +37,26 @@ function MyApp({ Component, pageProps }) {
     background: '#fff',
     text: '#000',
   };
+  const containerRef = useRef(null);
   return (
-    <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
-      <GlobalStyle />
+    <GlobalProvider>
+      <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
+        <GlobalStyle />
 
-      <AnimatePresence>
-        <motion.main
-          key={router.pathname}
-          variants={variants}
-          initial='initial'
-          animate='enter'
-          exit='exit'
-        >
-          <Component {...pageProps} />
-        </motion.main>
-      </AnimatePresence>
-    </ThemeProvider>
+        <AnimatePresence>
+          {/* ...your app */}
+          <motion.main
+            key={router.pathname}
+            variants={variants}
+            initial='initial'
+            animate='enter'
+            exit='exit'
+          >
+            <Component {...pageProps} />
+          </motion.main>
+        </AnimatePresence>
+      </ThemeProvider>
+    </GlobalProvider>
   );
 }
 

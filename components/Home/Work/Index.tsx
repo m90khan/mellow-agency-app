@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 import media from 'css-in-js-media';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -82,25 +82,36 @@ const Work = ({ projects }) => {
           {projects.map((project) => (
             <motion.div key={project.sys.id}>
               <OverflowWrapper>
-                <Image
-                  alt='logo'
-                  src={'https:' + project.fields.thumbnail.fields.file.url}
-                  layout='responsive'
-                  width={project.fields.thumbnail.fields.file.details.image.width}
-                  height={project.fields.thumbnail.fields.file.details.image.height}
-                />
-                <BoldTitle
-                  initial={{ y: '100%' }}
-                  animate={inView && { y: 0 }}
-                  transition={{
-                    ease: [0.6, 0.05, -0.01, 0.9],
-                    duration: 0.5,
-                  }}
-                ></BoldTitle>
+                <AnimateSharedLayout>
+                  <motion.header layoutId='header'>
+                    <motion.div layoutId='projectImg'>
+                      <Image
+                        alt='logo'
+                        src={'https:' + project.fields.thumbnail.fields.file.url}
+                        layout='responsive'
+                        width={project.fields.thumbnail.fields.file.details.image.width}
+                        height={project.fields.thumbnail.fields.file.details.image.height}
+                      />
+                    </motion.div>
+                    <Link href={`/projects/${project.fields.slug}`}>
+                      <motion.h1 layoutId='logo' className='fake-logo'>
+                        {project.fields.title}
+                      </motion.h1>
+                    </Link>
+                  </motion.header>
+                  <BoldTitle
+                    initial={{ y: '100%' }}
+                    animate={inView && { y: 0 }}
+                    transition={{
+                      ease: [0.6, 0.05, -0.01, 0.9],
+                      duration: 0.5,
+                    }}
+                  ></BoldTitle>
+                </AnimateSharedLayout>
               </OverflowWrapper>
-              <Link href={`/projects/${project.fields.slug}`}>
+              {/* <Link href={`/projects/${project.fields.slug}`}>
                 <Caption>{project.fields.title}</Caption>
-              </Link>
+              </Link> */}
             </motion.div>
           ))}
         </StatRows>
