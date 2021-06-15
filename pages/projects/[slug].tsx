@@ -69,7 +69,7 @@ const WordDetails = ({ project }) => {
               <Image
                 className='image'
                 src={'https:' + thumbImage}
-                layout='responsive'
+                layout='intrinsic'
                 width={thumbImageWidth}
                 height={thumbImageHeight}
               />
@@ -101,13 +101,19 @@ const WordDetails = ({ project }) => {
             ))}
           </motion.div>
         </ProjectHeader>
-        <motion.div>
+        <motion.div
+          style={{
+            position: 'relative',
+            width: '90%',
+            height: featImageHeight,
+            margin: '0 auto',
+          }}
+        >
           <Image
             className='image'
             src={'https:' + featImage}
-            layout='fixed'
-            width={featImageWidth}
-            height={thumbImageHeight}
+            layout='fill'
+            objectFit='cover'
           />
         </motion.div>
       </AnimatePresence>
