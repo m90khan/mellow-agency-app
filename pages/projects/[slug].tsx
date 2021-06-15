@@ -94,7 +94,11 @@ const WordDetails = ({ project }) => {
             </motion.p>
 
             <h1>Tech Stack:</h1>
-            <motion.p>{techStacks.map((skill) => ` ${skill},`)}</motion.p>
+            {techStacks.map((skill) => (
+              <motion.p style={{ display: 'inline-block' }} key={skill}>
+                {skill} ,
+              </motion.p>
+            ))}
           </motion.div>
         </ProjectHeader>
         <motion.div>
