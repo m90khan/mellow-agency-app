@@ -4,7 +4,10 @@ import media from 'css-in-js-media';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import IconToggle from './IconToggle';
+import { useGlobalStateContext } from '../utils/globalContext';
 export default function Header({ setToggleMenu, toggleMenu }) {
+  const { currentTheme } = useGlobalStateContext();
+
   return (
     <HeaderContainer
       initial={{ opacity: 0, y: -180 }}
@@ -16,9 +19,9 @@ export default function Header({ setToggleMenu, toggleMenu }) {
       }}
     >
       <div className='header-inner'>
-        <IconToggle />
+        <IconToggle toggleMenu={toggleMenu} />
         <Link href='/'>
-          {!toggleMenu ? (
+          {currentTheme === 'dark' && !toggleMenu ? (
             <Image
               alt='logo'
               src='/images/logo.svg'
@@ -45,8 +48,27 @@ export default function Header({ setToggleMenu, toggleMenu }) {
           }
           onClick={() => setToggleMenu(!toggleMenu)}
         >
-          <span></span>
-          <span></span>
+          <motion.span
+            initial={{ rotate: 0 }}
+            animate={{
+              rotate: toggleMenu ? 45 : 0,
+            }}
+            transition={{
+              duration: 1,
+              delay: 0.5,
+            }}
+          ></motion.span>
+          <motion.span
+            initial={{ rotate: 0, y: 0 }}
+            animate={{
+              rotate: toggleMenu ? -45 : 0,
+              y: toggleMenu ? -6 : 0,
+            }}
+            transition={{
+              duration: 1,
+              delay: 0.2,
+            }}
+          ></motion.span>
         </div>
       </div>
     </HeaderContainer>
@@ -94,7 +116,7 @@ const HeaderContainer = styled(motion.div)`
         width: 20px;
         height: 3px;
         margin: 2px 0;
-        background: var(--white);
+        background: ${(props) => props.theme.text};
         display: block;
         transition: 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
       }

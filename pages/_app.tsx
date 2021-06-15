@@ -1,11 +1,10 @@
 import GlobalStyle from '../styles/GlobalStyles';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { GlobalProvider, useGlobalStateContext } from '../utils/globalContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
 import { useRef } from 'react';
-
 const variants = {
   initial: {
     opacity: 0,
@@ -28,34 +27,32 @@ function MyApp({ Component, pageProps }) {
   const { currentTheme } = useGlobalStateContext();
 
   const router = useRouter();
-  const darkTheme: DefaultTheme = {
+  const darkTheme = {
     background: '#000',
-    text: '#fff',
+    text: '#fff6c4',
   };
 
   const lightTheme = {
-    background: '#fff',
+    background: '#FFFE55',
     text: '#000',
   };
-  const containerRef = useRef(null);
   return (
     <GlobalProvider>
-      <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
-        <GlobalStyle />
+      {/* <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
+        <GlobalStyle /> */}
 
-        <AnimatePresence>
-          {/* ...your app */}
-          <motion.main
-            key={router.pathname}
-            variants={variants}
-            initial='initial'
-            animate='enter'
-            exit='exit'
-          >
-            <Component {...pageProps} />
-          </motion.main>
-        </AnimatePresence>
-      </ThemeProvider>
+      <AnimateSharedLayout>
+        {/* <motion.main
+          key={router.pathname}
+          variants={variants}
+          initial='initial'
+          animate='enter'
+          exit='exit'
+        > */}
+        <Component {...pageProps} />
+        {/* </motion.main> */}
+      </AnimateSharedLayout>
+      {/* </ThemeProvider> */}
     </GlobalProvider>
   );
 }

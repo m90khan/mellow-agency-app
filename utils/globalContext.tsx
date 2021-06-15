@@ -3,8 +3,6 @@ import React, { createContext, useReducer, useContext, useEffect, useState } fro
 //Define Conext
 const GlobalStateContext = createContext({
   currentTheme: 'dark',
-  cursorType: false,
-  cursorStyles: 'pointer',
 });
 const GlobalDispatchContext = createContext(null);
 
@@ -17,12 +15,12 @@ const globalReducer = (state, action) => {
         currentTheme: action.theme,
       };
     }
-    case 'CURSOR_TYPE': {
-      return {
-        ...state,
-        cursorType: action.cursorType,
-      };
-    }
+    // case 'CURSOR_TYPE': {
+    //   return {
+    //     ...state,
+    //     cursorType: action.cursorType,
+    //   };
+    // }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -32,20 +30,31 @@ const globalReducer = (state, action) => {
 //Provider
 
 export const GlobalProvider = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState('dark');
+  // const [currentTheme, setCurrentTheme] = useState('dark');
+  // useEffect(() => {
+  //   setCurrentTheme(
+  //     window.localStorage.getItem('theme') == null
+  //       ? 'dark'
+  //       : window.localStorage.getItem('theme')
+  //   );
+  // }, [currentTheme]);
+  // const [state, dispatch] = useReducer(globalReducer, {
+  //   currentTheme: currentTheme,
+  //   cursorType: false,
+  //   cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
+  // });
+  const [initialState, setInitialState] = useState({ currentTheme: 'dark' });
+  const [state, dispatch] = useReducer(globalReducer, initialState);
   useEffect(() => {
-    setCurrentTheme(
-      window.localStorage.getItem('theme') == null
-        ? 'dark'
-        : window.localStorage.getItem('theme')
-    );
-  }, [currentTheme]);
-  const [state, dispatch] = useReducer(globalReducer, {
-    currentTheme: currentTheme,
-    cursorType: false,
-    cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
-  });
-
+    setInitialState({
+      currentTheme:
+        window?.localStorage.getItem('theme') == null
+          ? 'dark'
+          : window?.localStorage.getItem('theme'),
+      // cursorType: false,
+      // cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
+    });
+  }, [state, dispatch]);
   return (
     <GlobalDispatchContext.Provider value={dispatch}>
       <GlobalStateContext.Provider value={state}>{children}</GlobalStateContext.Provider>

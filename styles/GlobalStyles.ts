@@ -2,7 +2,7 @@
 import { createGlobalStyle, DefaultTheme } from 'styled-components';
 import media from 'css-in-js-media';
 
-const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
+const GlobalStyle = createGlobalStyle`
  /* *{
    outline: 1px solid red;
  } */

@@ -8,8 +8,7 @@ export const Nav = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: block;
-  background: var(--yellow);
-  color: var(--black);
+  background: ${(props) => props.theme.header};
   z-index: 100;
   overflow: hidden;
 `;
@@ -50,7 +49,7 @@ export const NavList = styled.div`
       svg {
         width: 100px;
         path {
-          fill: ${(props) => props.theme.background};
+          fill: ${(props) => props.theme.text};
         }
       }
     }
@@ -68,7 +67,7 @@ export const NavVideos = styled.div`
   background: #000;
   .reveal {
     width: 100%;
-    background: var(--yellow);
+    background: ${(props) => props.theme.header};
     position: absolute;
     top: 0;
     bottom: 0;

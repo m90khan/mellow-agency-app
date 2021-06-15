@@ -30,20 +30,22 @@ export const IconButton = styled.button`
   border: 0;
   background: transparent;
   padding: 10px;
+  z-index: 1000;
   margin: 0;
   &:hover {
     background: none;
   }
 `;
 
-const IconToggle = () => {
+const IconToggle = ({ toggleMenu }) => {
   const { currentTheme } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-  const [isLightMode, setIsLightMode] = useState(true);
+  const [isLightMode, setIsLightMode] = useState('');
   const ariaLabel =
     currentTheme === 'dark' ? 'Activate dark mode' : 'Activate light mode';
   const iconSize = '2rem';
-  const iconColor = '#fffe55';
+  const iconColor =
+    currentTheme === 'dark' ? `${toggleMenu ? '#101010' : '#FFFE55'}` : '#101010';
   const toggleTheme = () => {
     if (currentTheme === 'dark') {
       dispatch({ type: 'TOGGLE_THEME', theme: 'light' });
@@ -51,10 +53,14 @@ const IconToggle = () => {
       dispatch({ type: 'TOGGLE_THEME', theme: 'dark' });
     }
   };
-
   useEffect(() => {
+    const theme = window.localStorage.getItem('theme');
+    console.log(typeof theme);
+    if (theme == 'undefined') {
+      dispatch({ type: 'TOGGLE_THEME', theme: 'dark' });
+    }
     window.localStorage.setItem('theme', currentTheme);
-  }, [currentTheme]);
+  }, [currentTheme, isLightMode]);
 
   return (
     <>

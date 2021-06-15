@@ -19,7 +19,9 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js",
-    "assets/svg/social-icons.js"
+    "assets/svg/social-icons.js",
+    "utils/globalContext.tsx",
+    "pages/_app.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,14 +1,16 @@
 import Head from 'next/head';
 import { ReactNode, useRef, useState } from 'react';
-import styled from 'styled-components';
 import media from 'css-in-js-media';
+import { GlobalProvider, useGlobalStateContext } from '../utils/globalContext';
 
 import { useRouter, NextRouter } from 'next/router';
 import Header from './Header';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import Cursor from './Cursor';
-
+import styled, { ThemeProvider, DefaultTheme } from 'styled-components';
+import GlobalStyle from '../styles/GlobalStyles';
+import { motion } from 'framer-motion';
 interface Props {
   title: string | null;
   keywords?: string | null;
@@ -19,26 +21,42 @@ interface Props {
 function Layout({ title, keywords, description, children }: Props) {
   const router: NextRouter = useRouter();
   const [toggleMenu, setToggleMenu] = useState(false);
+  const { currentTheme } = useGlobalStateContext();
 
+  const darkTheme = {
+    background: '#101010',
+    text: '#fff',
+    header: '#FFFE55',
+    bigText: '#FFFE55',
+  };
+
+  const lightTheme = {
+    background: '#FFFE55',
+    text: '#101010',
+    header: '#fff',
+    bigText: '#101010',
+  };
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name='description' content={description} />
-        <meta name='keywords' content={keywords} />
-        <link rel='icon' href='/favicon.ico' />
-        <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;800&display=swap'
-        />
-      </Head>
-      <Navigation toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
-      <Cursor toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
-      <Header toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
-      <Container> {children}</Container>
-
-      <Footer />
-    </>
+    <motion.div>
+      <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
+        <Head>
+          <title>{title}</title>
+          <meta name='description' content={description} />
+          <meta name='keywords' content={keywords} />
+          <link rel='icon' href='/favicon.ico' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;600;800&display=swap'
+          />
+        </Head>
+        <GlobalStyle />
+        <Navigation toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+        <Cursor toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+        <Header toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+        <Container> {children}</Container>
+        <Footer />
+      </ThemeProvider>
+    </motion.div>
   );
 }
 Layout.defaultProps = {

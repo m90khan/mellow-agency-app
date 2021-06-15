@@ -5,16 +5,20 @@ import Layout from '../components/Layout';
 import { createClient } from 'contentful';
 import WhySection from '../components/Home/Why/Index';
 import dynamic from 'next/dynamic';
-
+import { motion } from 'framer-motion';
 import Help from '../components/Home/Help/Index';
 import React, { useState } from 'react';
 const Drawer = dynamic(() => import('../components/Drawer'));
 
 import Contact from '../components/Contact/Index';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 export default function Home({ services, projects, tests }) {
   const [isActiveDrawer, setIsActiveDrawer] = useState(false);
   const [showText, setShowText] = useState(true);
-  console.log(tests);
+  const router = useRouter();
+  // const { locale } = router;
+  // const t = locale === 'en' ? en : fr;
   return (
     <Layout>
       <Hero showText={showText} setShowText={setShowText} />
@@ -37,7 +41,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const services = await client.getEntries({ content_type: 'faq' });
   const projects = await client.getEntries({ content_type: 'project' });
   const tests = await client.getEntries({ content_type: 'test' });
-  console.log(tests.items);
   return {
     props: { services: services.items, projects: projects.items, tests: tests },
   };

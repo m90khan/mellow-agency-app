@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
 import { motion, useAnimation } from 'framer-motion';
+import media from 'css-in-js-media';
 
 import { useInView } from 'react-intersection-observer';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useGlobalStateContext } from '../../../utils/globalContext';
 const Container = styled.div`
   padding: 0 2.75vw;
   max-width: 90%;
-  margin: 0 auto;
+  margin: 5rem 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${media('<=tablet')} {
+    flex: 1;
+    margin-top: 5rem;
+    flex-wrap: wrap;
+  }
 `;
 
 const DefaultCard = styled(motion.div)`
@@ -24,7 +34,7 @@ const HeadlineWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: nowrap;
   white-space: nowrap;
-  color: var(--yellow);
+  color: ${(props) => props.theme.bigText};
 `;
 const Headline = styled.span`
   font-size: 7vw;
@@ -100,31 +110,24 @@ const WhySection = ({ services }) => {
         </DefaultCard>
       </GridCenterStats>
       <Container>
-        <motion.div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-        >
-          <About>
-            <h2>
-              Mellow is an integrated, full-service creative studio offering video
-              production, creative development, and post-production services.
-            </h2>
-            <p>
-              Everybody’s got a story. And we don’t stop until we’ve uncovered what makes
-              yours worth telling. Whether it’s working directly with you, an agency
-              partner, or putting the finishing touches on something special, we’re ready
-              to dig in and get our hands dirty—are you?
-            </p>
-          </About>
-          <Services>
-            <h3>Services</h3>
-            {services.map((service, index) => (
-              <Accordion key={service.sys.id} details={service.fields} />
-            ))}
-          </Services>
-        </motion.div>
+        <About>
+          <h2>
+            Mellow is an integrated, full-service creative studio offering video
+            production, creative development, and post-production services.
+          </h2>
+          <p>
+            Everybody’s got a story. And we don’t stop until we’ve uncovered what makes
+            yours worth telling. Whether it’s working directly with you, an agency
+            partner, or putting the finishing touches on something special, we’re ready to
+            dig in and get our hands dirty—are you?
+          </p>
+        </About>
+        <Services>
+          <h3>Services</h3>
+          {services.map((service, index) => (
+            <Accordion key={service.sys.id} details={service.fields} />
+          ))}
+        </Services>
       </Container>
     </HomeAboutSection>
   );
@@ -177,7 +180,7 @@ export default WhySection;
 
 const AccordionHeader = styled(motion.div)`
   width: 100%;
-  color: var(--yellow);
+  color: ${(props) => props.theme.bigText} !important;
   height: 32px;
   display: flex;
   align-items: center;
@@ -193,7 +196,8 @@ const AccordionIcon = styled.div`
   span {
     width: 16px;
     height: 4px;
-    background: var(--yellow);
+    background: ${(props) => props.theme.bigText};
+
     transition: all 0.1s ease-in-out;
   }
 `;
@@ -206,7 +210,7 @@ const AccordionContent = styled(motion.div)`
     width: 100%;
     margin: 8px 0;
     font-size: 1.5rem;
-    color: var(--white);
+    color: ${(props) => props.theme.text};
     display: block;
     font-weight: 300;
   }
@@ -220,20 +224,36 @@ export const HomeAboutSection = styled(motion.div)`
   padding: 10rem 0;
   overflow: hidden;
   min-height: 100vh;
+  ${media('<=tablet')} {
+    min-height: auto;
+  }
 `;
-export const About = styled.div`
+const About = styled.div`
+  ${media('<=tablet')} {
+    flex: 0 0 100%;
+  }
   h2 {
     width: 60%;
     font-size: 2.3rem;
     font-weight: 400;
     margin: 2rem 0 0 6rem;
+    color: ${(props) => props.theme.text};
   }
   p {
     max-width: 50rem;
     font-size: 1.4rem;
     line-height: 1.6rem;
     margin: 2rem 0 0 6rem;
-    color: var(--white);
+    color: ${(props) => props.theme.text};
   }
 `;
-export const Services = styled.div``;
+const Services = styled.div`
+  ${media('<=tablet')} {
+    flex: 0 0 100%;
+    max-width: 80%;
+    margin-top: 4rem;
+  }
+  h3 {
+    color: ${(props) => props.theme.text};
+  }
+`;

@@ -23,7 +23,7 @@ const SectionWrapper = styled.div`
 `;
 const BoldTitle = styled(motion.h1)`
   font-weight: 500;
-  color: var(--white);
+  color: ${(props) => props.theme.text};
   font-size: 8rem;
   margin: 0;
   transform: translate(-50%, -50%);
@@ -42,21 +42,21 @@ const Bubble = styled(motion.div)`
   border-radius: 25px;
   font-size: 2vw;
 
-  color: var(--black);
-  background: var(--yellow);
+  color: ${(props) => props.theme.background};
+  background: ${(props) => props.theme.bigText};
   align-self: flex-end;
 
   &:before {
     right: -7px;
     width: 20px;
-    background-color: var(--yellow);
+    background-color: ${(props) => props.theme.bigText};
     border-bottom-left-radius: 16px 14px;
   }
 
   &:after {
     right: -26px;
     width: 26px;
-    background-color: var(--black);
+    background-color: ${(props) => props.theme.background};
     border-bottom-left-radius: 10px;
   }
   &:before,

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useGlobalStateContext } from '../utils/globalContext';
 
 const Cursor = ({ toggleMenu, setToggleMenu }) => {
-  const { cursorType } = useGlobalStateContext();
   const cursor = useRef(null);
 
   const onMouseMove = (event) => {
@@ -21,9 +20,9 @@ const Cursor = ({ toggleMenu, setToggleMenu }) => {
   return (
     <>
       <CursorContainer
-        className={`${!!cursorType ? 'hovered' : ''} ${cursorType} ${
-          toggleMenu ? 'nav-open' : ''
-        }`}
+        // className={`${!!cursorType ? 'hovered' : ''} ${cursorType} ${
+        //   toggleMenu ? 'nav-open' : ''
+        // }`}
         ref={cursor}
       />
     </>
@@ -39,7 +38,7 @@ const CursorContainer = styled.div`
   width: 20px;
   height: 20px;
   background: #ffff5511;
-  border: 5px solid #fffe55;
+  border: 5px solid ${(props) => props.theme.text};
   padding: 1.2rem;
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -49,7 +48,7 @@ const CursorContainer = styled.div`
   pointer-events: none;
   z-index: 999;
   &.pointer {
-    border: 4px solid ${(props) => props.theme.text} !important;
+    border: 4px solid ${(props) => props.theme.text};
   }
   &.hovered {
     background: transparent !important;

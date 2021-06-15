@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import media from 'css-in-js-media';
+import { useGlobalStateContext } from '../../../utils/globalContext';
 
 const StyledHero = styled.section`
   height: 90vh;
@@ -20,6 +21,7 @@ const LargeTitle = styled(motion.h1)`
   transform: rotate(-7deg);
   text-align: center;
   transition: all 1s;
+  color: ${(props) => props.theme.text};
   ${media('<=tablet')} {
     font-size: 7rem;
   }
@@ -27,7 +29,7 @@ const LargeTitle = styled(motion.h1)`
 const Caption = styled(motion.p)`
   font-size: 3rem;
   position: absolute;
-  color: var(--white);
+  color: ${(props) => props.theme.text};
   width: 100%;
   left: 0;
   top: 60vh;
@@ -60,23 +62,40 @@ const Container = styled.div`
 `;
 
 const DownArrow = () => {
+  const { currentTheme } = useGlobalStateContext();
+  const iconColor = currentTheme === 'dark' ? '#fff' : '#101010';
+
   return (
-    <svg
+    <motion.svg
       aria-hidden='true'
       focusable='false'
       role='img'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 448 512'
     >
-      <path
-        fill='#fff'
+      <motion.path
+        initial={{ scale: 0.5, y: 0 }}
+        animate={{
+          scale: 1,
+          y: 10,
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          repeatType: 'mirror',
+        }}
+        fill={iconColor}
         d='M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z'
       />
-    </svg>
+    </motion.svg>
   );
 };
 
 const Hero = ({ showText, setShowText }) => {
+  const { currentTheme } = useGlobalStateContext();
+
+  const iconColor = currentTheme === 'dark' ? '#fffe55' : '#fff';
+
   useEffect(() => {
     setTimeout(() => {
       setShowText(false);
@@ -166,7 +185,7 @@ const Hero = ({ showText, setShowText }) => {
               style={!showText && { transform: 'rotate(0)', animationDuration: '1s' }}
             >
               Mellow Build{' '}
-              {showText ? ' Brands' : <span style={{ color: 'yellow' }}>Brands</span>}
+              {showText ? ' Brands' : <span style={{ color: iconColor }}>Brands</span>}
             </LargeTitle>
           </motion.div>
         </motion.div>
