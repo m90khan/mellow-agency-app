@@ -1,14 +1,16 @@
 import { GetServerSideProps } from 'next';
-import Hero from '../components/Home/Hero/Index';
-import Work from '../components/Home/Work/Index';
+// import Hero from '../components/Home/Hero/Index';
+// import Work from '../components/Home/Work/Index';
+// import Help from '../components/Home/Help/Index';
 import Layout from '../components/Layout';
 import { createClient } from 'contentful';
-import WhySection from '../components/Home/Why/Index';
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
-import Help from '../components/Home/Help/Index';
 import React, { useState } from 'react';
 const Drawer = dynamic(() => import('../components/Drawer'));
+const WhySection = dynamic(() => import('../components/Home/Why/Index'));
+const Hero = dynamic(() => import('../components/Home/Hero/Index'));
+const Work = dynamic(() => import('../components/Home/Work/Index'));
+const Help = dynamic(() => import('../components/Home/Help/Index'));
 
 import Contact from '../components/Contact/Index';
 import { useRouter } from 'next/router';
