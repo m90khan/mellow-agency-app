@@ -4,9 +4,9 @@ import media from 'css-in-js-media';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import IconToggle from './IconToggle';
-import { useGlobalStateContext } from '../utils/globalContext';
+import { useGlobalDispatchContext, useGlobalStateContext } from '../utils/globalContext';
 export default function Header({ setToggleMenu, toggleMenu }) {
-  const { currentTheme } = useGlobalStateContext();
+  const { currentTheme, currentLanguage } = useGlobalStateContext();
 
   return (
     <HeaderContainer

@@ -41,8 +41,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   });
   // Fetch services
   const services = await client.getEntries({ content_type: 'faq' });
-  const projects = await client.getEntries({ content_type: 'project' });
+  const projects = await client.getEntries({ content_type: 'project', locale: '*' });
   const tests = await client.getEntries({ content_type: 'test' });
+
   return {
     props: { services: services.items, projects: projects.items, tests: tests },
   };

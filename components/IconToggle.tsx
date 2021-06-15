@@ -38,9 +38,8 @@ export const IconButton = styled.button`
 `;
 
 const IconToggle = ({ toggleMenu }) => {
-  const { currentTheme } = useGlobalStateContext();
+  const { currentTheme, currentLanguage } = useGlobalStateContext();
   const dispatch = useGlobalDispatchContext();
-  const [isLightMode, setIsLightMode] = useState('');
   const ariaLabel =
     currentTheme === 'dark' ? 'Activate dark mode' : 'Activate light mode';
   const iconSize = '2rem';
@@ -53,18 +52,29 @@ const IconToggle = ({ toggleMenu }) => {
       dispatch({ type: 'TOGGLE_THEME', theme: 'dark' });
     }
   };
+
+  const toggleLanguage = () => {
+    if (currentLanguage === 'english') {
+      dispatch({ type: 'TOGGLE_LANGUAGE', language: 'german' });
+    } else {
+      dispatch({ type: 'TOGGLE_LANGUAGE', language: 'english' });
+    }
+  };
+
+  const languageText = currentLanguage === 'english' ? 'DE' : 'EN';
+
   useEffect(() => {
     const theme = window.localStorage.getItem('theme');
-    console.log(typeof theme);
     if (theme == 'undefined') {
       dispatch({ type: 'TOGGLE_THEME', theme: 'dark' });
     }
     window.localStorage.setItem('theme', currentTheme);
-  }, [currentTheme, isLightMode]);
+  }, [currentTheme]);
 
   return (
     <>
       <AnimatePresence initial={false}>
+        <LanguageBtn onClick={toggleLanguage}>{languageText}</LanguageBtn>
         <IconButton aria-label={ariaLabel} onClick={toggleTheme}>
           {currentTheme === 'light' ? (
             <AnimatedIcon iconKey='sun'>
@@ -82,3 +92,14 @@ const IconToggle = ({ toggleMenu }) => {
 };
 
 export default IconToggle;
+
+const LanguageBtn = styled(motion.h2)`
+  padding: 1rem 1.5rem;
+  background-color: ${(props) => props.theme.bigText};
+  position: fixed;
+  font-size: 2rem;
+  top: 45%;
+  cursor: pointer;
+  color: ${(props) => props.theme.background};
+  right: 0;
+`;

@@ -92,10 +92,16 @@ const DownArrow = () => {
 };
 
 const Hero = ({ showText, setShowText }) => {
-  const { currentTheme } = useGlobalStateContext();
+  const { currentTheme, currentLanguage } = useGlobalStateContext();
 
   const iconColor = currentTheme === 'dark' ? '#fffe55' : '#fff';
 
+  const HeroTitle =
+    currentLanguage === 'english' ? 'Mellow Build Brands' : 'Mellow machen Marken';
+  const HeroSubTitle =
+    currentLanguage === 'english'
+      ? 'We solve your problem ... you focus on growth'
+      : 'Wir lösen Ihr Problem ... Sie setzen auf Wachstum';
   useEffect(() => {
     setTimeout(() => {
       setShowText(false);
@@ -122,7 +128,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -140,7 +146,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -158,7 +164,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
           </>
         )}
@@ -184,8 +190,18 @@ const Hero = ({ showText, setShowText }) => {
             <LargeTitle
               style={!showText && { transform: 'rotate(0)', animationDuration: '1s' }}
             >
-              Mellow Build{' '}
-              {showText ? ' Brands' : <span style={{ color: iconColor }}>Brands</span>}
+              {currentLanguage === 'english' ? ' Mellow Build' : 'Mellow machen'}{' '}
+              {showText ? (
+                currentLanguage === 'english' ? (
+                  ' Brands'
+                ) : (
+                  'Marken'
+                )
+              ) : (
+                <span style={{ color: iconColor }}>
+                  {currentLanguage === 'english' ? ' Brands' : 'Marken'}
+                </span>
+              )}
             </LargeTitle>
           </motion.div>
         </motion.div>
@@ -199,7 +215,7 @@ const Hero = ({ showText, setShowText }) => {
             delay: 3.4,
           }}
         >
-          <Caption>We solve your problem ... you focus on growth</Caption>
+          <Caption>{HeroSubTitle}</Caption>
         </motion.div>
 
         {showText && (
@@ -219,7 +235,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -237,7 +253,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -255,7 +271,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>Mellow Build Brands</LargeTitle>
+              <LargeTitle>{HeroTitle}</LargeTitle>
             </motion.div>
           </>
         )}

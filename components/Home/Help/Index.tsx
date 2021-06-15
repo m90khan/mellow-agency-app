@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useGlobalStateContext } from '../../../utils/globalContext';
 const OverflowWrapper = styled.div`
   overflow: hidden;
 `;
@@ -89,6 +90,8 @@ const Pos4 = styled(BubbleWrapper)`
 `;
 
 const Help = ({ setIsActiveDrawer }) => {
+  const { currentLanguage } = useGlobalStateContext();
+
   const [firstTitle, setFirstTitle] = useState(true);
   const [secondTitle, setSecondTitle] = useState(false);
   const [sectionRef, inView] = useInView({
@@ -109,6 +112,28 @@ const Help = ({ setIsActiveDrawer }) => {
     }
   }, [inView]);
 
+  const questionOne =
+    currentLanguage === 'english'
+      ? "You're facing problems with technical resources!"
+      : 'Sie haben Probleme mit technischen Ressourcen!';
+  const questionTwo =
+    currentLanguage === 'english'
+      ? '              Oh no ... You made an architectural mistake?   '
+      : 'Oh nein ... Sie haben einen architektonischen Fehler gemacht?';
+  const questionThree =
+    currentLanguage === 'english'
+      ? 'Need help with product validation?'
+      : 'Benötigen Sie Hilfe bei der Produktvalidierung?';
+  const questionFour =
+    currentLanguage === 'english'
+      ? 'Probleme mit Ihrer Website-Wartung.'
+      : '  Problems with your website maintenance.  ';
+
+  const helpTitleOne =
+    currentLanguage === 'english' ? 'How can we help?' : 'Wie können wir helfen?';
+
+  const helpTitleTwo =
+    currentLanguage === 'english' ? "Let's Connect" : 'Lass uns verbinden';
   return (
     <HelpSection ref={sectionRef}>
       <Container>
@@ -123,7 +148,7 @@ const Help = ({ setIsActiveDrawer }) => {
                 delay: 1,
               }}
             >
-              You're facing problems with technical resources!
+              {questionOne}
             </Bubble>
           </Pos1>
           <Pos2 data-scroll data-scroll-speed={-1}>
@@ -136,7 +161,7 @@ const Help = ({ setIsActiveDrawer }) => {
                 delay: 2.2,
               }}
             >
-              Oh no ... You made a architectural mistake?
+              {questionTwo}{' '}
             </Bubble>
           </Pos2>
           <Pos3 data-scroll data-scroll-speed={1}>
@@ -149,7 +174,7 @@ const Help = ({ setIsActiveDrawer }) => {
                 delay: 1.8,
               }}
             >
-              Need help with product validation?
+              {questionThree}
             </Bubble>
           </Pos3>
           <Pos4 data-scroll data-scroll-speed={2}>
@@ -162,7 +187,7 @@ const Help = ({ setIsActiveDrawer }) => {
                 delay: 1.4,
               }}
             >
-              Problems with your website maintenance.
+              {questionFour}
             </Bubble>
           </Pos4>
           <OverflowWrapper>
@@ -177,7 +202,7 @@ const Help = ({ setIsActiveDrawer }) => {
                     duration: 0.5,
                   }}
                 >
-                  How can we help?
+                  {helpTitleOne}
                 </BoldTitle>
               )}
             </AnimatePresence>
@@ -192,7 +217,7 @@ const Help = ({ setIsActiveDrawer }) => {
                   }}
                   onClick={() => setIsActiveDrawer(true)}
                 >
-                  Let's Connect
+                  {helpTitleTwo}
                 </BoldTitle>
               )}
             </AnimatePresence>

@@ -3,6 +3,7 @@ import React, { createContext, useReducer, useContext, useEffect, useState } fro
 //Define Conext
 const GlobalStateContext = createContext({
   currentTheme: 'dark',
+  currentLanguage: '',
 });
 const GlobalDispatchContext = createContext(null);
 
@@ -13,6 +14,12 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         currentTheme: action.theme,
+      };
+    }
+    case 'TOGGLE_LANGUAGE': {
+      return {
+        ...state,
+        currentLanguage: action.language,
       };
     }
     // case 'CURSOR_TYPE': {
@@ -43,7 +50,10 @@ export const GlobalProvider = ({ children }) => {
   //   cursorType: false,
   //   cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
   // });
-  const [initialState, setInitialState] = useState({ currentTheme: 'dark' });
+  const [initialState, setInitialState] = useState({
+    currentTheme: 'dark',
+    currentLanguage: '',
+  });
   const [state, dispatch] = useReducer(globalReducer, initialState);
   useEffect(() => {
     setInitialState({
@@ -51,6 +61,7 @@ export const GlobalProvider = ({ children }) => {
         window?.localStorage.getItem('theme') == null
           ? 'dark'
           : window?.localStorage.getItem('theme'),
+      currentLanguage: '',
       // cursorType: false,
       // cursorStyles: ['pointer', 'hovered', 'locked', 'white'],
     });

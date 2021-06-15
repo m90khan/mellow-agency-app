@@ -5,6 +5,7 @@ import { AnimateSharedLayout, motion, AnimatePresence } from 'framer-motion';
 import media from 'css-in-js-media';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useGlobalStateContext } from '../../../utils/globalContext';
 
 const StyledAbout = styled.section`
   padding-top: 15rem;
@@ -81,48 +82,83 @@ const Caption = styled(motion.h1)`
 `;
 
 const Work = ({ projects }) => {
+  const { currentLanguage } = useGlobalStateContext();
+
   const [statsRef, inView] = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
+  const WorkTitle =
+    currentLanguage === 'english'
+      ? 'Mellow is an integrated, full-service creative studio offering video production, creative development, and post-production services.'
+      : 'Mellow ist ein integriertes Full-Service-Kreativstudio, das Videoproduktion, kreative Entwicklung und Postproduktionsdienste anbietet.';
+  const recentProjects =
+    currentLanguage === 'english' ? 'Recent Projects' : 'Letzte Projekte';
 
   return (
     <StyledAbout>
       <SplitWrapper ref={statsRef}>
         <StatRows>
-          {projects.map((project) => (
-            <motion.div key={project.sys.id}>
-              <OverflowWrapper>
-                <motion.header>
-                  <motion.div layoutId={project.sys.id}>
-                    <Image
-                      alt='logo'
-                      src={'https:' + project.fields.thumbnail.fields.file.url}
-                      layout='responsive'
-                      width={project.fields.thumbnail.fields.file.details.image.width}
-                      height={project.fields.thumbnail.fields.file.details.image.height}
-                    />
-                  </motion.div>
-                  <Link href={`/projects/${project.fields.slug}`}>
-                    <motion.h1 layoutId={project.fields.title} className='fake-logo'>
-                      {project.fields.title}
-                    </motion.h1>
-                  </Link>
-                </motion.header>
-              </OverflowWrapper>
-              {/* <Link href={`/projects/${project.fields.slug}`}>
+          {projects.map(
+            ({
+              fields: {
+                title: { 'en-US': englishTitle, de: germanTitle },
+                description: { 'en-US': englishDescription, de: germanDescription },
+
+                thumbnail: {
+                  'en-US': {
+                    fields: {
+                      file: {
+                        'en-US': {
+                          url: thumbImage,
+                          details: {
+                            image: { width: thumbImageWidth, height: thumbImageHeight },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+                slug: { 'en-US': projectSlug },
+              },
+              sys: { id: sysID },
+            }) => (
+              <motion.div key={sysID}>
+                <OverflowWrapper>
+                  <motion.header>
+                    <motion.div>
+                      <motion.div layoutId={sysID}>
+                        <Image
+                          className='image'
+                          src={'https:' + thumbImage}
+                          layout='responsive'
+                          width={thumbImageWidth}
+                          height={thumbImageHeight}
+                        />
+                      </motion.div>
+                    </motion.div>
+                    <Link href={`/projects/${projectSlug}`}>
+                      <motion.h1
+                      // layoutId={
+                      //   currentLanguage === 'english' ? englishTitle : germanTitle
+                      // }
+                      >
+                        {currentLanguage === 'english' ? englishTitle : germanTitle}
+                      </motion.h1>
+                    </Link>
+                  </motion.header>
+                </OverflowWrapper>
+                {/* <Link href={`/projects/${project.fields.slug}`}>
               <Caption>{project.fields.title}</Caption>
             </Link> */}
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          )}
         </StatRows>
         <div>
           <BoldTitle>
-            <p>
-              Mellow is an integrated, full-service creative studio offering video
-              production, creative development, and post-production services.
-            </p>
-            <h1>Recent Projects</h1>
+            <p>{WorkTitle}</p>
+            <h1>{recentProjects}</h1>
           </BoldTitle>
         </div>
       </SplitWrapper>
