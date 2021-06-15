@@ -5,12 +5,14 @@ import { GetServerSideProps } from 'next';
 import Layout from '../components/Layout';
 import { createClient } from 'contentful';
 import dynamic from 'next/dynamic';
+import loadable from '@loadable/component';
+
 import React, { useState } from 'react';
-const Drawer = dynamic(() => import('../components/Drawer'));
-const WhySection = dynamic(() => import('../components/Home/Why/Index'));
-const Hero = dynamic(() => import('../components/Home/Hero/Index'));
-const Work = dynamic(() => import('../components/Home/Work/Index'));
-const Help = dynamic(() => import('../components/Home/Help/Index'));
+const Drawer = loadable(() => import('../components/Drawer'));
+const WhySection = loadable(() => import('../components/Home/Why/Index'));
+const Hero = loadable(() => import('../components/Home/Hero/Index'));
+const Work = loadable(() => import('../components/Home/Work/Index'));
+const Help = loadable(() => import('../components/Home/Help/Index'));
 
 import Contact from '../components/Contact/Index';
 import { useRouter } from 'next/router';
