@@ -3,11 +3,10 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Layout from '../../components/Layout';
 import media from 'css-in-js-media';
-import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { FeaturedProjects } from '../../styles/HomeStyles';
 import { useGlobalStateContext } from '../../utils/globalContext';
 
 const WordDetails = ({ project }) => {

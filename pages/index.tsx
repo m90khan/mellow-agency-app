@@ -15,12 +15,9 @@ const Work = loadable(() => import('../components/Home/Work/Index'));
 const Help = loadable(() => import('../components/Home/Help/Index'));
 
 import Contact from '../components/Contact/Index';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
 export default function Home({ services, projects, tests }) {
   const [isActiveDrawer, setIsActiveDrawer] = useState(false);
   const [showText, setShowText] = useState(true);
-  const router = useRouter();
   // const { locale } = router;
   // const t = locale === 'en' ? en : fr;
   return (
