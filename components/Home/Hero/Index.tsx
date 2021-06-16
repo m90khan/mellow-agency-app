@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import media from 'css-in-js-media';
 import { useGlobalStateContext } from '../../../utils/globalContext';
-
+import en from './../../../utils/locales/en';
+import de from './../../../utils/locales/de';
 const StyledHero = styled.section`
   height: 90vh;
   width: 100%;
@@ -94,14 +95,9 @@ const DownArrow = () => {
 const Hero = ({ showText, setShowText }) => {
   const { currentTheme, currentLanguage } = useGlobalStateContext();
 
-  const iconColor = currentTheme === 'dark' ? '#fffe55' : '#fff';
+  const iconColor = currentTheme === 'dark' ? 'var(--yellow)' : '#fff';
+  const t = currentLanguage === 'english' ? en : de;
 
-  const HeroTitle =
-    currentLanguage === 'english' ? 'Mellow Build Brands' : 'Mellow machen Marken';
-  const HeroSubTitle =
-    currentLanguage === 'english'
-      ? 'We solve your problem ... you focus on growth'
-      : 'Wir lösen Ihr Problem ... Sie setzen auf Wachstum';
   useEffect(() => {
     setTimeout(() => {
       setShowText(false);
@@ -128,7 +124,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -146,7 +142,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -164,7 +160,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
           </>
         )}
@@ -215,7 +211,7 @@ const Hero = ({ showText, setShowText }) => {
             delay: 3.4,
           }}
         >
-          <Caption>{HeroSubTitle}</Caption>
+          <Caption>{t.HeroSubTitle}</Caption>
         </motion.div>
 
         {showText && (
@@ -235,7 +231,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -253,7 +249,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
 
             <motion.div
@@ -271,7 +267,7 @@ const Hero = ({ showText, setShowText }) => {
                 delay: 0.6,
               }}
             >
-              <LargeTitle>{HeroTitle}</LargeTitle>
+              <LargeTitle>{t.HeroTitle}</LargeTitle>
             </motion.div>
           </>
         )}

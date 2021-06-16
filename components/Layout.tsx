@@ -26,12 +26,12 @@ function Layout({ title, keywords, description, children }: Props) {
   const darkTheme = {
     background: '#101010',
     text: '#fff',
-    header: '#FFFE55',
-    bigText: '#FFFE55',
+    header: 'var(--yellow)',
+    bigText: 'var(--yellow)',
   };
 
   const lightTheme = {
-    background: '#FFFE55',
+    background: 'var(--yellow)',
     text: '#101010',
     header: '#fff',
     bigText: '#101010',

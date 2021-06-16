@@ -6,6 +6,9 @@ import media from 'css-in-js-media';
 import { useInView } from 'react-intersection-observer';
 import styled, { css } from 'styled-components';
 import { useGlobalStateContext } from '../../../utils/globalContext';
+
+import en from '../../../utils/locales/en';
+import de from '../../../utils/locales/de';
 const Container = styled.div`
   padding: 0 2.75vw;
   max-width: 90%;
@@ -56,6 +59,7 @@ const WhySection = ({ services }) => {
     // Giving our scrollwheel additional margin before executing animation
     rootMargin: '-50px',
   });
+  const t = currentLanguage === 'english' ? en : de;
 
   useEffect(() => {
     if (inView) {
@@ -63,15 +67,6 @@ const WhySection = ({ services }) => {
     }
   }, [animation, inView]);
 
-  const whyTitleOne =
-    currentLanguage === 'english'
-      ? `Mellow is an integrated, full-service creative studio offering video
-production, creative development, and post-production services.`
-      : `Mellow ist ein integriertes Full-Service-Kreativstudio, das Videoproduktion, kreative Entwicklung und Postproduktionsdienste anbietet.`;
-  const whyTitleTwo =
-    currentLanguage === 'english'
-      ? 'Everybody’s got a story. And we don’t stop until we’ve uncovered what makes yours worth telling. Whether it’s working directly with you, an agency partner, or putting the finishing touches on something special, we’re ready to dig in and get our hands dirty—are you?'
-      : ' Jeder hat eine Geschichte. Und wir hören nicht auf, bis wir herausgefunden haben, was Ihre erzählenswert macht. Ob es um die direkte Zusammenarbeit mit Ihnen als Agenturpartner oder um den letzten Schliff für etwas Besonderes geht, wir sind bereit, einzusteigen und uns die Hände schmutzig zu machen – oder?';
   return (
     <HomeAboutSection
       ref={aboutRef}
@@ -122,8 +117,8 @@ production, creative development, and post-production services.`
       </GridCenterStats>
       <Container>
         <About>
-          <h2>{whyTitleOne}</h2>
-          <p>{whyTitleTwo}</p>
+          <h2>{t.whyTitleOne}</h2>
+          <p>{t.whyTitleTwo}</p>
         </About>
         <Services>
           <h3>Services</h3>

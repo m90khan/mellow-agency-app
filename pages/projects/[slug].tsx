@@ -53,7 +53,7 @@ const WordDetails = ({ project }) => {
     <Layout
       title={
         currentLanguage === 'english'
-          ? englishTitle
+          ? englishTitle + ' | Mellow Creative Studio'
           : germanTitle + ' | Mellow Creative Studio'
       }
       description={
@@ -62,76 +62,73 @@ const WordDetails = ({ project }) => {
           : germanDescription.slice(0, 200)
       }
     >
-      <AnimatePresence>
-        <ProjectHeader>
-          <Link href={`/projects/${project.fields.slug}`}>
-            <motion.div layoutId={project.sys.id}>
-              <Image
-                className='image'
-                src={'https:' + thumbImage}
-                layout='intrinsic'
-                width={thumbImageWidth}
-                height={thumbImageHeight}
-              />
-            </motion.div>
-          </Link>
-
-          <motion.div>
-            <motion.h1
-            // layoutId={currentLanguage === 'english' ? englishTitle : germanTitle}
-            >
-              {currentLanguage === 'english' ? englishTitle : germanTitle}
-            </motion.h1>
-
-            <motion.p
-            // layoutId={
-            //   currentLanguage === 'english'
-            //     ? englishDescription.slice(0, 5)
-            //     : germanDescription.slice(0, 5)
-            // }
-            >
-              {currentLanguage === 'english' ? englishDescription : germanDescription}
-            </motion.p>
-
-            <h1>Tech Stack:</h1>
-            {techStacks.map((skill) => (
-              <motion.p style={{ display: 'inline-block' }} key={skill}>
-                {skill} ,
-              </motion.p>
-            ))}
-          </motion.div>
-        </ProjectHeader>
+      {/* <AnimatePresence> */}
+      <ProjectHeader>
+        <motion.h1 className='title'>
+          {currentLanguage === 'english' ? englishTitle : germanTitle}
+        </motion.h1>
         <motion.div
+          layoutId={project.sys.id}
           style={{
             position: 'relative',
             width: '90%',
-            height: featImageHeight,
+            height: '70vh',
             margin: '0 auto',
           }}
         >
           <Image
             className='image'
-            src={'https:' + featImage}
+            src={'https:' + thumbImage}
             layout='fill'
             objectFit='cover'
           />
         </motion.div>
-      </AnimatePresence>
+
+        <motion.div className='description'>
+          <motion.p>
+            {currentLanguage === 'english' ? englishDescription : germanDescription}
+          </motion.p>
+
+          <h1>Tech Stack:</h1>
+          <div>
+            {techStacks.map((skill) => (
+              <motion.p style={{ display: 'inline-block' }} key={skill}>
+                {skill} ,
+              </motion.p>
+            ))}
+          </div>
+        </motion.div>
+      </ProjectHeader>
+      <motion.div
+        style={{
+          position: 'relative',
+          width: '80%',
+          height: featImageHeight,
+          margin: '0 auto',
+        }}
+      >
+        <Image
+          className='image'
+          src={'https:' + featImage}
+          layout='fill'
+          objectFit='cover'
+        />
+      </motion.div>
+      {/* </AnimatePresence> */}
     </Layout>
   );
 };
 
 const ProjectHeader = styled(motion.header)`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   column-gap: 5rem;
-  min-height: 80vh;
-
+  min-height: 100vh;
   width: 90%;
-  margin: auto auto;
+  margin: 0 auto;
   padding: 2rem 0;
-
+  max-width: 90%;
   ${media('<=desktop', '>tablet')} {
     grid-template-columns: 1fr;
   }
@@ -141,13 +138,29 @@ const ProjectHeader = styled(motion.header)`
   ${media('<=phone')} {
     font-size: 50%;
   }
-  h1 {
-    padding: 2rem 0;
+  .description {
+    width: 90%;
+    margin: 0 auto;
+    h1 {
+      width: 100%;
+      padding: 0;
+      color: ${(props) => props.theme.text};
+    }
+  }
+  .title {
+    padding: 2rem 6rem;
     color: ${(props) => props.theme.text};
+    text-align: left;
+    font-size: 10rem;
+    width: 100%;
+    margin: auto auto;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
   }
   p {
     font-size: 1.8rem;
-    padding: 0.5rem;
+    padding: 5rem 0 3rem 0;
     line-height: 1.4;
   }
 `;

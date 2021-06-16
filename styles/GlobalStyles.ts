@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html {
-    --yellow: #FFFE55;
+    --yellow:   #FFED7C;
     --black: #101010;
     --grey: #272727;
     --white: #fff;

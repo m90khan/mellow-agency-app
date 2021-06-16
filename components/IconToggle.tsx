@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalDispatchContext, useGlobalStateContext } from '../utils/globalContext';
 
 const variants = {
-  initial: { opacity: 0, scale: 0.5, x: 0, rotate: -90 },
-  animate: { opacity: 1, scale: 1, x: 0, rotate: 0 },
-  exit: { opacity: 0, scale: 0.5, x: 0, rotate: 90 },
+  initial: { opacity: 0, scale: 0.5, y: 100, rotate: -90 },
+  animate: { opacity: 1, scale: 1, y: 0, rotate: 0 },
+  exit: { opacity: 0, scale: 0.5, x: 100, rotate: 90 },
 };
 
 const AnimatedIcon = ({ iconKey, children }) => (
@@ -44,7 +44,10 @@ const IconToggle = ({ toggleMenu }) => {
     currentTheme === 'dark' ? 'Activate dark mode' : 'Activate light mode';
   const iconSize = '2rem';
   const iconColor =
-    currentTheme === 'dark' ? `${toggleMenu ? '#101010' : '#FFFE55'}` : '#101010';
+    currentTheme === 'dark'
+      ? `${toggleMenu ? 'var(--black)' : 'var(--yellow)'}`
+      : 'var(--black)';
+
   const toggleTheme = () => {
     if (currentTheme === 'dark') {
       dispatch({ type: 'TOGGLE_THEME', theme: 'light' });
@@ -74,8 +77,15 @@ const IconToggle = ({ toggleMenu }) => {
   return (
     <>
       <AnimatePresence initial={false}>
-        <LanguageBtn onClick={toggleLanguage}>{languageText}</LanguageBtn>
-        <IconButton aria-label={ariaLabel} onClick={toggleTheme}>
+        <LanguageBtn
+          initial={{ opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 2, delay: 0.6 }}
+          onClick={toggleLanguage}
+        >
+          {languageText}
+        </LanguageBtn>
+        <IconButton onClick={toggleTheme}>
           {currentTheme === 'light' ? (
             <AnimatedIcon iconKey='sun'>
               <FiSun size={iconSize} color={iconColor} />
@@ -102,4 +112,5 @@ const LanguageBtn = styled(motion.h2)`
   cursor: pointer;
   color: ${(props) => props.theme.background};
   right: 0;
+  z-index: 200;
 `;
