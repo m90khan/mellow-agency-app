@@ -63,7 +63,7 @@ const Facebook = ({ iconColor }) => (
 const Footer = () => {
   const animation = useAnimation();
   const { currentTheme } = useGlobalStateContext();
-  const iconColor = currentTheme === 'dark' ? ' #FFFE55' : '#101010';
+  const iconColor = currentTheme === 'dark' ? 'var(--yellow)' : '#101010';
   const [footerRef, inView] = useInView({
     triggerOnce: true,
     rootMargin: '-100px',

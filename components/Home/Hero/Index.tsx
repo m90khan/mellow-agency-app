@@ -5,6 +5,7 @@ import media from 'css-in-js-media';
 import { useGlobalStateContext } from '../../../utils/globalContext';
 import en from './../../../utils/locales/en';
 import de from './../../../utils/locales/de';
+import Icons from './../../Micro/Icons';
 const StyledHero = styled.section`
   height: 90vh;
   width: 100%;
@@ -13,6 +14,7 @@ const StyledHero = styled.section`
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  position: relative;
 `;
 const LargeTitle = styled(motion.h1)`
   font-size: 6rem;
@@ -33,7 +35,7 @@ const Caption = styled(motion.p)`
   color: ${(props) => props.theme.text};
   width: 100%;
   left: 0;
-  top: 60vh;
+  top: 50vh;
   margin: 0;
   text-align: center;
 
@@ -49,7 +51,7 @@ const Caption = styled(motion.p)`
 `;
 const ArrowWrapper = styled(motion.div)`
   left: 50%;
-  top: 70vh;
+  top: 60vh;
   transform: translateX(-50%);
   position: absolute;
 
@@ -106,6 +108,7 @@ const Hero = ({ showText, setShowText }) => {
 
   return (
     <StyledHero>
+      <Icons />
       <Container>
         {showText && (
           <>
