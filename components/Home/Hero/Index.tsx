@@ -108,7 +108,7 @@ const Hero = ({ showText, setShowText }) => {
 
   return (
     <StyledHero>
-      <Icons />
+      {!showText && <Icons />}
       <Container>
         {showText && (
           <>

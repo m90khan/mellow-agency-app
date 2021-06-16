@@ -276,12 +276,10 @@ const Icons = () => {
     <>
       <a href='/' target='_blank'>
         <Pos1
-          initial={{ scale: 1, opacity: 0.8 }}
-          animate={{ scale: 1.1, opacity: 1 }}
+          initial={{ y: '-20%', opacity: 0.8 }}
+          animate={{ y: '20%', opacity: 1 }}
           transition={{
-            damping: 10,
-            duration: 4,
-            delay: 3.5,
+            duration: 2,
             repeat: Infinity,
             repeatType: 'reverse',
           }}
@@ -291,12 +289,11 @@ const Icons = () => {
       </a>
       <a href='/' target='_blank'>
         <Pos2
-          initial={{ scale: 1, opacity: 0.8 }}
-          animate={{ scale: 1.1, opacity: 1 }}
+          initial={{ y: '-20%', opacity: 0.8 }}
+          animate={{ y: '20%', opacity: 1 }}
           transition={{
             damping: 20,
-            duration: 2,
-            delay: 3.5,
+            duration: 3,
             repeat: Infinity,
             repeatType: 'reverse',
           }}
@@ -306,12 +303,11 @@ const Icons = () => {
       </a>
       <a href='/' target='_blank'>
         <Pos3
-          initial={{ scale: 1, opacity: 0.8 }}
-          animate={{ scale: 1.1, opacity: 1 }}
+          initial={{ y: '-20%', opacity: 0.8 }}
+          animate={{ y: '20%', opacity: 1 }}
           transition={{
-            damping: 20,
-            duration: 3,
-            delay: 3.5,
+            damping: 30,
+            duration: 4,
             repeat: Infinity,
             repeatType: 'reverse',
           }}
@@ -328,6 +324,7 @@ const BubbleWrapper = styled(motion.div)`
   padding: 0.5rem;
   border-radius: 1rem;
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 `;
 const Pos1 = styled(BubbleWrapper)`
   top: 20%;
