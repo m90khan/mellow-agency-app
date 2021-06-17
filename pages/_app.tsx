@@ -1,6 +1,6 @@
-import { GlobalProvider, useGlobalStateContext } from '../utils/globalContext';
+import { GlobalProvider } from '../utils/globalContext';
 import { AnimateSharedLayout } from 'framer-motion';
-import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
+
 const variants = {
   initial: {
     opacity: 0,
@@ -23,15 +23,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <GlobalProvider>
       <AnimateSharedLayout>
-        {/* <motion.main
-          key={router.pathname}
-          variants={variants}
-          initial='initial'
-          animate='enter'
-          exit='exit'
-        > */}
         <Component {...pageProps} />
-        {/* </motion.main> */}
       </AnimateSharedLayout>
     </GlobalProvider>
   );

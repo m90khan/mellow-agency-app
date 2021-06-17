@@ -1,6 +1,8 @@
 export default {
   HeroTitle: 'Mellow machen Marken',
   HeroSubTitle: 'Wir lösen Ihr Problem ... Sie setzen auf Wachstum',
+  ResourceTitle:
+    'Wir finden und kombinieren die besten Ressourcen, um Ihr Problem zu lösen',
   questionOne: 'Sie haben Probleme mit technischen Ressourcen!',
   questionTwo: 'Oh nein ... Sie haben einen architektonischen Fehler gemacht?',
   questionThree: 'Benötigen Sie Hilfe bei der Produktvalidierung?',

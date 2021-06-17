@@ -104,7 +104,7 @@ const IconToggle = ({ toggleMenu }) => {
 export default IconToggle;
 
 const LanguageBtn = styled(motion.h2)`
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1.2rem;
   background-color: ${(props) => props.theme.bigText};
   position: fixed;
   font-size: 2rem;

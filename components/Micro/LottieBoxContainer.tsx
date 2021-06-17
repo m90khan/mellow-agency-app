@@ -3,6 +3,9 @@ import { useLottie, useLottieInteractivity } from 'lottie-react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import scene from '../../assets/lottie/scene.json';
+import { useGlobalStateContext } from '../../utils/globalContext';
+import de from '../../utils/locales/de';
+import en from '../../utils/locales/en';
 
 const titleAnim = {
   hidden: { y: 200 },
@@ -38,14 +41,14 @@ const LottieBoxContainer = () => {
   const [ref, inView] = useInView({
     threshold: 0.6,
   });
+  const { currentLanguage } = useGlobalStateContext();
+
+  const t = currentLanguage === 'english' ? en : de;
+
   return (
     <Container ref={ref}>
       <Hide>
-        {inView && (
-          <Heading variants={titleAnim}>
-            We find and combine the best resources to solve your problem ...
-          </Heading>
-        )}
+        {inView && <Heading variants={titleAnim}>{t.ResourceTitle} ...</Heading>}
       </Hide>
       <LottieBox />
     </Container>
