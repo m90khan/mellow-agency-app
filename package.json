@@ -15,6 +15,7 @@
     "css-in-js-media": "^2.0.0",
     "framer-motion": "^4.1.17",
     "locomotive-scroll": "^4.1.1",
+    "lottie-react": "^2.1.0",
     "next": "10.2.3",
     "react": "17.0.2",
     "react-clock": "^3.0.0",

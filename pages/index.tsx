@@ -4,26 +4,25 @@ import { GetServerSideProps } from 'next';
 // import Help from '../components/Home/Help/Index';
 import Layout from '../components/Layout';
 import { createClient } from 'contentful';
-import dynamic from 'next/dynamic';
 import loadable from '@loadable/component';
-
 import React, { useState } from 'react';
 const Drawer = loadable(() => import('../components/Drawer'));
 const WhySection = loadable(() => import('../components/Home/Why/Index'));
 const Hero = loadable(() => import('../components/Home/Hero/Index'));
 const Work = loadable(() => import('../components/Home/Work/Index'));
 const Help = loadable(() => import('../components/Home/Help/Index'));
-
+import LottieBoxContainer from './../components/Micro/LottieBoxContainer';
 import Contact from '../components/Contact/Index';
+
 export default function Home({ services, projects, tests }) {
   const [isActiveDrawer, setIsActiveDrawer] = useState(false);
   const [showText, setShowText] = useState(true);
-  // const { locale } = router;
-  // const t = locale === 'en' ? en : fr;
+
   return (
     <Layout>
       <Hero showText={showText} setShowText={setShowText} />
       <Work projects={projects} />
+      <LottieBoxContainer />
       <WhySection services={services} />
       <Help setIsActiveDrawer={setIsActiveDrawer} />
       <Drawer isActive={isActiveDrawer} setIsActive={setIsActiveDrawer}>
