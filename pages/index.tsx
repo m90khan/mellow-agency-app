@@ -1,17 +1,18 @@
 import { GetServerSideProps } from 'next';
-// import Hero from '../components/Home/Hero/Index';
-// import Work from '../components/Home/Work/Index';
-// import Help from '../components/Home/Help/Index';
+import Hero from '../components/Home/Hero/Index';
+import Work from '../components/Home/Work/Index';
+import Help from '../components/Home/Help/Index';
 import Layout from '../components/Layout';
 import { createClient } from 'contentful';
 import loadable from '@loadable/component';
 import React, { useState } from 'react';
 import LottieBoxContainer from './../components/Micro/LottieBoxContainer';
-const Drawer = loadable(() => import('../components/Drawer'));
-const WhySection = loadable(() => import('../components/Home/Why/Index'));
-const Hero = loadable(() => import('../components/Home/Hero/Index'));
-const Work = loadable(() => import('../components/Home/Work/Index'));
-const Help = loadable(() => import('../components/Home/Help/Index'));
+import Drawer from '../components/Drawer';
+import WhySection from '../components/Home/Why/Index';
+// const WhySection = loadable(() => import('../components/Home/Why/Index'));
+// const Hero = loadable(() => import('../components/Home/Hero/Index'));
+// const Work = loadable(() => import('../components/Home/Work/Index'));
+// const Help = loadable(() => import('../components/Home/Help/Index'));
 import Contact from '../components/Contact/Index';
 
 export default function Home({ services, projects, tests }) {

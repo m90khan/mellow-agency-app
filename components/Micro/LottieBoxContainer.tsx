@@ -48,11 +48,7 @@ const LottieBoxContainer = () => {
   return (
     <Container ref={ref}>
       <Hide>
-        {inView && (
-          <Heading variants={titleAnim}>
-            We find and combine the best resources to solve your problem ...
-          </Heading>
-        )}
+        {inView && <Heading variants={titleAnim}>{t.ResourceTitle} ...</Heading>}
       </Hide>
       <LottieBox />
     </Container>
