@@ -274,7 +274,7 @@ const Icons = () => {
   const strokeColor = currentTheme === 'dark' ? '#fff' : '#101010';
   return (
     <>
-      <a href='https://www.instagram.com/uxd.khan/' target='_blank'>
+      <a href='/' target='_blank'>
         <Pos1
           initial={{ y: '-20%', opacity: 0.8 }}
           animate={{ y: '20%', opacity: 1 }}
@@ -287,7 +287,7 @@ const Icons = () => {
           <Youtube iconColor={iconColor} strokeColor={strokeColor} />
         </Pos1>
       </a>
-      <a href='https://www.linkedin.com/in/uxdkhan/' target='_blank'>
+      <a href='/' target='_blank'>
         <Pos2
           initial={{ y: '-20%', opacity: 0.8 }}
           animate={{ y: '20%', opacity: 1 }}
@@ -301,7 +301,7 @@ const Icons = () => {
           <LinkedIn iconColor={iconColor} strokeColor={strokeColor} />
         </Pos2>
       </a>
-      <a href='https://www.behance.net/Khan_Mohsin' target='_blank'>
+      <a href='/' target='_blank'>
         <Pos3
           initial={{ y: '-20%', opacity: 0.8 }}
           animate={{ y: '20%', opacity: 1 }}
